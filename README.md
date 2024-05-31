@@ -63,12 +63,33 @@ Build it:
 ./gradlew publishToMavenLocal
 ```
 
+### Setup wasm-tools
+
+Get & build wit-bindgen:
+```
+git clone git@github.com:nick1udwig/wit-bindgen.git
+cd wit-bindgen
+git checkout fully-qualify-java-address
+cargo install --path .
+```
+
 ### Build to WASM WASI
 
 Get & build it:
 ```
 git clone git@github.com:nick1udwig/java-hello.git
 cd java-hello
+git checkout hf/to-component
+```
+
+Codegen from WIT file (only necessary if `kinode.wit` is updated):
+```
+wit-bindgen teavm-java kinode.wit -w process-v0
+cp -r wit src/main/java
+```
+
+Compile WASM:
+```
 mvn compile
 ```
 
