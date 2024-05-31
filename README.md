@@ -36,26 +36,8 @@ brew install maven
 
 Get it:
 ```
-git clone git@github.com:konsoletyper/teavm.git
+git clone git@github.com:nick1udwig/teavm.git
 cd teavm
-```
-
-Edit `settings.gradle.kts`:
-```
-diff --git a/settings.gradle.kts b/settings.gradle.kts
-index ad4938d45..2c55ffaee 100644
---- a/settings.gradle.kts
-+++ b/settings.gradle.kts
-@@ -68,7 +68,8 @@ gradle.allprojects {
-         options.encoding = "UTF-8"
-     }
-     tasks.withType<Javadoc>().configureEach {
--        options.encoding = "UTF-8"
-+        enabled = false
-+        //options.encoding = "UTF-8"
-     }
-     tasks.withType<JavaExec>().configureEach {
-         if (name.endsWith("main()")) {
 ```
 
 Build it:
