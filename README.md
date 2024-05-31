@@ -2,6 +2,8 @@
 
 Investigation of Java-based Kinode processes.
 
+The actual thing that gets run in Kinode is the [`init` method of the ProcessV0Impl.java](https://github.com/nick1udwig/java-hello/blob/master/src/main/java/wit/worlds/ProcessV0Impl.java).
+
 ## Usage
 
 ### Get java 19.0.2
@@ -77,7 +79,14 @@ diff --git a/wit/worlds/ProcessV0.java b/wit/worlds/ProcessV0.java
 +     public static void wasmExportInit(int p0, int p1) {
 ```
 
+Add the Impl:
 ```
+cp src/main/java/wit/worlds/ProcessV0Impl.java wit/worlds/ProcessV0Impl.java
+```
+
+Put in the proper place:
+```
+rm -r src/main/java/wit
 cp -r wit src/main/java
 ```
 
@@ -90,7 +99,7 @@ Turn it into a component:
 ```
 cd target/generated/wasm/teavm-wasm
 
-# Build a package (we will put it into the package):
+# Build a package (to wrap the Java process):
 kit n foo
 kit b foo
 
