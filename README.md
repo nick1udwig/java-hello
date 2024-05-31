@@ -82,9 +82,20 @@ cd java-hello
 git checkout hf/to-component
 ```
 
-Codegen from WIT file (only necessary if `kinode.wit` is updated):
+Codegen from WIT file & make important edit (only necessary if `kinode.wit` is updated):
 ```
 wit-bindgen teavm-java kinode.wit -w process-v0
+```
+
+Edit:
+```
+diff --git a/wit/worlds/ProcessV0.java b/wit/worlds/ProcessV0.java
+17,18c17,18
+-     private static void wasmExportInit(int p0, int p1) {
++     public static void wasmExportInit(int p0, int p1) {
+```
+
+```
 cp -r wit src/main/java
 ```
 
@@ -93,7 +104,28 @@ Compile WASM:
 mvn compile
 ```
 
-Run it:
+Turn it into a component:
 ```
-wasmtime target/generated/wasm/teavm-wasm/classes.wasm
+cd target/generated/wasm/teavm-wasm
+
+# Build a package (we will put it into the package):
+kit n foo
+kit b foo
+
+# Turn Java module into a component: a Kinode process
+wasm-tools component embed ../../../../kinode.wit --world process-v0 classes.wasm -o foo0.wasm
+wasm-tools component new foo0.wasm -o foo.wasm --adapt foo/foo/wasi_snapshot_preview1.wasm
+
+# Put it into package
+cp foo.wasm foo/pkg/foo.wasm
+```
+
+Start a fake node (use another terminal):
+```
+kit f
+```
+
+Run the Java-based Kinode process
+```
+kit s foo
 ```
