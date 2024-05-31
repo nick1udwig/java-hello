@@ -63,7 +63,6 @@ Get & build it:
 ```
 git clone git@github.com:nick1udwig/java-hello.git
 cd java-hello
-git checkout hf/to-component
 ```
 
 Codegen from WIT file & make important edit (only necessary if `kinode.wit` is updated):
