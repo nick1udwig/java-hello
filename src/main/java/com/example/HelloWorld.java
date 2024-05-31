@@ -10,7 +10,7 @@ public class HelloWorld {
         String message = "Hello, world from main!";
         Standard.printToTerminal(verbosityLevel, message);
 
-        ProcessV0Impl.init("foo");
+        ProcessV0.wasmExportInit(0, 0);
         //System.out.println("Hello, World!");
     }
 }
